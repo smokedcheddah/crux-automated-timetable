@@ -32,48 +32,29 @@ MATHTF111_slots = []
 MEF112_slots = []
 PHYF110_slots = []
 
+subject_list = {
+    'CHEM F111': CHEMF111_slots,
+    'CHEM F110': CHEMF110_slots,
+    'EEE F111': EEEF111_slots,
+    'ME F112': MEF112_slots,
+    'PHY F111': PHYF111_slots,
+    'MATH F111': MATHF111_slots,
+    'PHY TF111': PHYTF111_slots,
+    'MATH TF111': MATHTF111_slots,
+    'EEE TF111': EEETF111_slots,
+    'CHEM TF111': CHEMTF111_slots,
+    'ME F112 LEC': MEF112L_slots,
+    'PHY F110': PHYF110_slots,
+}
+
 
 for subject in subjects:
-    if subject['subject_name'] == "CHEM F110":
-        CHEMF110_slots.append(subject)
-    elif subject['subject_name'] == "CHEM F111":
-        CHEMF111_slots.append(subject)
-    elif subject['subject_name'] == "EEE F111":
-        EEEF111_slots.append(subject)
-    elif subject['subject_name'] == "ME F112":
-        MEF112_slots.append(subject)
-    elif subject['subject_name'] == "PHY F111":
-        PHYF111_slots.append(subject)
-    elif subject['subject_name'] == "MATH F111":
-        MATHF111_slots.append(subject)
-    elif subject['subject_name'] == "PHY TF111":
-        PHYTF111_slots.append(subject)
-    elif subject['subject_name'] == "MATH TF111":
-        MATHTF111_slots.append(subject)
-    elif subject['subject_name'] == "EEE TF111":
-        EEETF111_slots.append(subject)
-    elif subject['subject_name'] == "CHEM TF111":
-        CHEMTF111_slots.append(subject)
-    elif subject['subject_name'] == "ME F112 LEC":
-        MEF112L_slots.append(subject)
-    elif subject['subject_name'] == "PHY F110":
-        PHYF110_slots.append(subject)
+    if subject['subject_name'] in subject_list:
+        subject_list[subject['subject_name']].append(subject)
 
 
-subject_list = {
-    'CHEM_F111': CHEMF111_slots,
-    'CHEM_F110': CHEMF110_slots,
-    'EEE_F111': EEEF111_slots,
-    'ME_F112': MEF112_slots,
-    'PHY_F111': PHYF111_slots,
-    'MATH_F111': MATHF111_slots,
-    'PHY_TF111': PHYTF111_slots,
-    'MATH_TF111': MATHTF111_slots,
-    'EEE_TF111': EEETF111_slots,
-    'CHEM_TF111': CHEMTF111_slots,
-    'ME_F112L': MEF112L_slots,
-    'PHY_F110': PHYF110_slots,
-}
+
+
 
 
 for subject, slots in subject_list.items():
@@ -116,3 +97,4 @@ if selected_slots:
             f"Subject: {slot['subject_name']}, Teacher: {slot['teacher_name']}, Day: {slot['day']}, Time: {slot['time_slot']}")
 else:
     print("No valid schedule could be generated.")
+
