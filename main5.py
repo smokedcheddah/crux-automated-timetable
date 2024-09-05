@@ -1,5 +1,13 @@
 import mysql.connector
 import random
+import matplotlib.pyplot as plt
+import pandas as pd
+
+
+
+
+
+
 
 
 connection = mysql.connector.connect(
@@ -91,10 +99,29 @@ def select_slots(subject_list):
 
 
 selected_slots = select_slots(subject_list)
+
 if selected_slots:
     for slot in selected_slots:
         print(
             f"Subject: {slot['subject_name']}, Teacher: {slot['teacher_name']}, Day: {slot['day']}, Time: {slot['time_slot']}")
 else:
     print("No valid schedule could be generated.")
+
+
+df = pd.DataFrame(selected_slots)
+
+day_order = ["MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY"]
+
+# Pivot the data to get days as columns and times as rows, with the correct day order
+calendar = df.pivot(index='time_slot', columns='day', values='subject_name').reindex(columns=day_order)
+
+# Plot the calendar
+fig, ax = plt.subplots()
+ax.axis('tight')
+ax.axis('off')
+table = ax.table(cellText=calendar.values, colLabels=calendar.columns, rowLabels=calendar.index, cellLoc='center', loc='center')
+
+plt.show()
+
+
 
